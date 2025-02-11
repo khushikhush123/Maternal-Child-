@@ -4,18 +4,6 @@ Welcome to the **MOM & CHILD** project! This platform is designed to provide com
 
 ---
 
-## 📌 Table of Contents  
-1. [Project Overview](#-project-overview)  
-2. [Features](#-features)  
-3. [Technologies Used](#-technologies-used)  
-4. [Backend-as-a-Service (BaaS) Platforms](#-backend-as-a-service-baas-platforms)  
-5. [API Integration](#-api-integration)  
-6. [ API Workflow Diagrams](#-API-Workflow-Diagrams)  
-7. [How to Use](#-how-to-use)  
-8. [Future Enhancements](#-future-enhancements)  
-
----
-
 ## 🚀 Project Overview  
 The **MOM & CHILD** platform is a web-based application that focuses on maternal and child health. It provides:  
 - **Health Education**: Information on maternal nutrition, infant care, and vaccinations.  
