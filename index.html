@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOM & CHILD - Maternal & Child Health</title>
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/?size=100&id=SqvibmaLEyHE&format=png&color=000000">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --secondary-color: #f4f0ff;
+            --text-color: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: white !important;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #9c27b0 !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(106, 13, 173, 0.7), rgba(106, 13, 173, 0.7)), 
+                        url('https://img.freepik.com/free-photo/portrait-affectionate-happy-mother-child_23-2151030095.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+        }
+
+        /* Section Styles */
+        .section-title {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        /* Card Styles */
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .card-img-top {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        /* Emergency Section */
+        .emergency-section {
+            background: linear-gradient(135deg, #6a0dad 0%, #9c27b0 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .emergency-btn {
+            background-color: white;
+            color: var(--primary-color);
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .emergency-btn:hover {
+            transform: scale(1.05);
+            background-color: #f0f0f0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .hero p {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 70vh;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+            .section-padding {
+                padding: 50px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#" style="font-family: 'Orbitron', sans-serif; letter-spacing: 2px; color: #6a0dad;">
+                <span style="font-size: 1.5em;">MOM&CHILD</span>
+                <span style="font-size: 0.8em; display: block; margin-top: -5px;">HEALTHCARE</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#topics">Health Topics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#documents">Documents</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#chat-ai">Chat AI</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#countries">Countries</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#emergency">Emergency</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <style>
+    .navbar-toggler {
+        border: none;
+        padding: 0.5rem;
+        transition: transform 0.3s ease;
+    }
+
+    .navbar-toggler:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    .navbar-toggler-icon {
+        transition: transform 0.3s ease;
+    }
+
+    .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+        transform: rotate(90deg);
+    }
+
+    .navbar-collapse {
+        transition: all 0.3s ease;
+    }
+
+    .nav-link {
+        position: relative;
+        transition: color 0.3s ease;
+    }
+
+    .nav-link:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-color);
+        transition: width 0.3s ease;
+    }
+
+    .nav-link:hover:after {
+        width: 100%;
+    }
+    </style></li>
+
+    <script>
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        let navbar = document.getElementById('navbarNav');
+        let toggle = document.querySelector('.navbar-toggler');
+        if (navbar.classList.contains('show') && !navbar.contains(e.target) && !toggle.contains(e.target)) {
+            navbar.classList.remove('show');
+        }
+    });
+
+    // Close mobile menu when clicking nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            const navbarCollapse = document.getElementById('navbarNav');
+            if (navbarCollapse.classList.contains('show')) {
+                document.querySelector('.navbar-toggler').click();
+            }
+        });
+    });
+    </script>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container hero-content">
+            <h1>Maternal & Child Health</h1>
+            <p>Ensuring a healthier future for mothers and children worldwide</p>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <p>We are dedicated to providing comprehensive maternal and child healthcare services. Our mission is to ensure a healthy and safe future for every mother and child through innovative healthcare solutions, education, and support.</p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://img.freepik.com/free-photo/mom-gently-breast-feeding-her-child_23-2149424440.jpg" 
+                         class="img-fluid rounded" alt="About Us">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Topics -->
+    <section id="topics" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="section-title">Health Topics</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://img.freepik.com/free-photo/happy-asian-pregnant-woman-cooking-salad-home-doing-fresh-green-salad-eating-many-different-vegetables-pregnancy-healthy-pregnancy-concept_74952-2663.jpg" 
+                             class="card-img-top" alt="Maternal Nutrition">
+                        <div class="card-body">
+                            <h5 class="card-title">Maternal Nutrition</h5>
+                            <p class="card-text">Essential diet plans for a healthy pregnancy.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://img.freepik.com/free-photo/side-view-mom-spraying-hand-sanitizer-child-s-hands_23-2148732573.jpg" 
+                             class="card-img-top" alt="Infant Care">
+                        <div class="card-body">
+                            <h5 class="card-title">Infant Care</h5>
+                            <p class="card-text">Comprehensive guide to newborn care and development.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://img.freepik.com/free-photo/toddler-getting-vaccination-by-pediatrician_53876-146586.jpg" 
+                             class="card-img-top" alt="Vaccinations">
+                        <div class="card-body">
+                            <h5 class="card-title">Vaccinations</h5>
+                            <p class="card-text">Important immunizations for mother and child.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Documents Section -->
+<section id="documents" class="section-padding">
+    <div class="container">
+        <h2 class="section-title">Essential Documents</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://img.freepik.com/free-photo/diploma-with-red-ribbon-bow-wooden-table_1142-55375.jpg" 
+                         class="card-img-top" alt="Birth Certificate">
+                    <div class="card-body">
+                        <h5 class="card-title">Birth Certificate</h5>
+                        <p class="card-text">Official birth registration documents</p>
+                        <a href="https://services.india.gov.in/service/listing?cat_id=83&ln=en" class="btn btn-secondary mb-2">Child Care(Link)</a>
+                            <a href="https://dc.crsorgi.gov.in/assets/download/all_forms_CRS_2019_new.pdf" class="btn btn-secondary mb-2">All Forms CRS</a>
+                            <a href="https://nhm.gov.in/New_Updates_2018/NHM_Components/Immunization/Guildelines_for_immunization/MCP_Guide_Book.pdf" class="btn btn-secondary">MCP Guide Book(NHM.gov)</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://img.freepik.com/free-photo/close-up-nurse-writing_23-2150780354.jpg" 
+                         class="card-img-top" alt="Vaccination Records">
+                    <div class="card-body">
+                        <h5 class="card-title">Vaccination Records</h5>
+                        <p class="card-text">Complete immunization history</p>
+                        <div class="d-grid gap-2">
+                            <a href="https://docs.google.com/presentation/d/1cCnKbqgz6z-aqSxtKA0T56t5tLzFCOqV/edit?usp=sharing&ouid=106683524089595038140&rtpof=true&sd=true" class="btn btn-secondary mb-2">Armed Forces Immunization Schedule</a>
+                            <a href="http://drive.google.com/file/d/162Sw_IlylhP5x5AUJ5Kb8dXfdeW3jnBc/view?usp=sharing" class="btn btn-secondary mb-2">National Vaccination Policy</a>
+                            <a href="https://drive.google.com/file/d/1X4zAm5fQRPAQr60mbmIUZqStd32YOdL-/view?usp=sharing" class="btn btn-secondary">Who maternal and newborn care</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://img.freepik.com/free-photo/care-job-scene-with-patient-being-cared_23-2151224227.jpg" 
+                         class="card-img-top" alt="Medical History">
+                    <div class="card-body">
+                        <h5 class="card-title">Medical History</h5>
+                        <p class="card-text">Comprehensive health records</p>
+                        <a href="https://www.niti.gov.in/sites/default/files/2025-01/Fiscal_Health_Index_24012025_Final.pdf" class="btn btn-secondary mb-2">Fiscal Health Index(2025)</a>
+                        <a href="https://mohfw.gov.in/sites/default/files/National_Digital_Health_Blueprint_Report_comments_invited.pdf" class="btn btn-secondary mb-2">National Health Reports(Mohfw.gov)</a>
+                        <a href="https://hme.jk.gov.in/pdfs/National%20Programs.pdf" class="btn btn-secondary mb-2">NATIONAL HEALTH PROGRAMMES</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Global Presence -->
+    <section id="countries" class="section-padding bg-light">
+        <div class="container">
+            <h2 class="section-title">Global Presence</h2>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="https://img.freepik.com/free-photo/american-elections-vote-right_23-2151841459.jpg" 
+                             class="card-img-top" alt="USA">
+                        <div class="card-body">
+                            <h5 class="card-title">United States</h5>
+                            <p class="card-text">Comprehensive maternal health programs</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="https://img.freepik.com/free-photo/india-republic-day-celebration-with-3d-person-flag_23-2151016029.jpg" 
+                             class="card-img-top" alt="India">
+                        <div class="card-body">
+                            <h5 class="card-title">India</h5>
+                            <p class="card-text">Innovative maternal care initiatives</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="https://img.freepik.com/free-photo/portrait-female-working-nurse_23-2150829773.jpg" 
+                             class="card-img-top" alt="Nigeria">
+                        <div class="card-body">
+                            <h5 class="card-title">Nigeria</h5>
+                            <p class="card-text">Community-focused health programs</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="https://img.freepik.com/free-photo/canada-flag-female-doctor-with-stethoscope-national-healthcare-system_559531-10993.jpg" 
+                             class="card-img-top" alt="Australia">
+                        <div class="card-body">
+                            <h5 class="card-title">Australia</h5>
+                            <p class="card-text">Advanced maternal health research</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat With AI Section -->
+<!-- Chat With AI Section -->
+<section id="chat-ai" class="section-padding" style="background-color: var(--secondary-color);">
+    <div class="container">
+        <h2 class="section-title text-center">Chat with AI</h2>
+        <div class="d-flex justify-content-center">
+            <div class="card border-0 shadow-lg text-white" style="max-width: 900px; width: 100%; background: linear-gradient(135deg, #6a0dad, #9c27b0); border-radius: 15px; overflow: hidden;">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h5 class="fw-bold text-white">AI Health Assistant</h5>
+                            <p class="text-light">Your intelligent maternal & child health companion</p>
+                        </div>
+                        <div class="position-relative">
+                            <div class="rounded-circle bg-success p-3"></div>
+                            <div class="position-absolute top-50 start-50 translate-middle bg-light rounded-circle" style="width: 40px; height: 40px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Chat iframe (Wider Shape) -->
+                    <div class="position-relative overflow-hidden rounded" style="height: 500px; width: 100%;">
+                        <iframe src="https://www.chatbase.co/chatbot-iframe/c5kufbp91Mu2lGczEz39B" width="100%" height="500px" class="border-0 rounded"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+        <!-- Features -->
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm p-3 text-center" style="background-color: white; color: var(--primary-color);">
+                    <h5 class="fw-bold">Advanced AI Technology</h5>
+                    <p>Expert guidance on maternal & child health.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm p-3 text-center" style="background-color: white; color: var(--primary-color);">
+                    <h5 class="fw-bold">24/7 Support</h5>
+                    <p>Get instant responses to your health queries.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm p-3 text-center" style="background-color: white; color: var(--primary-color);">
+                    <h5 class="fw-bold">Privacy Ensured</h5>
+                    <p>Your data is secure & confidential.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="mt-4 p-4 text-light rounded" style="background: linear-gradient(135deg, #6a0dad, #9c27b0);">
+            <h5 class="fw-bold">Important Notice</h5>
+            <p>This AI Health Assistant provides general medical guidance and should not replace professional medical consultation. Always seek a doctor's advice for serious concerns.</p>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Emergency Section -->
+    <section id="emergency" class="py-5 bg-gradient">
+        <div class="container">
+            <h2 class="section-title text-center mb-5" data-aos="fade-up">Emergency Services</h2>
+            
+            <!-- Ambulance Service Card -->
+            <div class="row mb-4">
+                <div class="col-md-12" data-aos="fade-up">
+                    <div class="card emergency-card d-flex flex-row">
+                        <div class="card-body text-center flex-fill">
+                            <i class="fas fa-ambulance display-4 mb-3 text-danger"></i>
+                            <h3 class="card-title">Ambulance Service</h3>
+                            <p class="card-text">24/7 emergency medical transport</p>
+                            <a href="tel:+102" class="btn btn-danger btn-lg pulse-button">
+                                <i class="fas fa-phone-alt me-2"></i>Call 102
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Helpline Numbers Grid -->
+            <div class="row">
+                <div class="col-md-4 mb-4" data-aos="fade-up">
+                    <div class="card emergency-card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-hospital-user display-4 mb-3 text-warning"></i>
+                            <h3 class="card-title">Emergency Care</h3>
+                            <p class="card-text">Immediate medical attention</p>
+                            <a href="tel:+108" class="btn btn-warning btn-lg">
+                                <i class="fas fa-phone-alt me-2"></i>Call 108
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up">
+                    <div class="card emergency-card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-hands-helping display-4 mb-3 text-info"></i>
+                            <h3 class="card-title">Helpline</h3>
+                            <p class="card-text">24/7 medical guidance</p>
+                            <a href="tel:+1098" class="btn btn-info btn-lg">
+                                <i class="fas fa-phone-alt me-2"></i>Call 1098
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up">
+                    <div class="card emergency-card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-user-md display-4 mb-3 text-success"></i>
+                            <h3 class="card-title">Doctor Consultation</h3>
+                            <p class="card-text">Speak to a doctor anytime</p>
+                            <a href="tel:+101" class="btn btn-success btn-lg">
+                                <i class="fas fa-phone-alt me-2"></i>Call 101
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="emergency-info mt-5 text-center" data-aos="fade-up">
+                <h4 class="mb-4">Emergency Protocol</h4>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="alert alert-danger">
+                            <h5>What to do in emergency:</h5>
+                            <ul class="list-unstyled">
+                                <li>Stay calm and assess the situation</li>
+                                <li>Call emergency numbers immediately</li>
+                                <li>Follow dispatcher instructions</li>
+                                <li>Have medical records ready</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="alert alert-info">
+                            <h5>Keep Ready:</h5>
+                            <ul class="list-unstyled">
+                                <li>Medical history documents</li>
+                                <li>Insurance information</li>
+                                <li>Emergency contact numbers</li>
+                                <li>Basic first aid kit</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <style>
+        .emergency-card {
+            transition: transform 0.3s ease;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+    
+        .emergency-card:hover {
+            transform: translateY(-10px);
+        }
+    
+        .pulse-button {
+            animation: pulse 1.5s infinite;
+        }
+    
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    
+        .alert {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+    
+        @media (max-width: 768px) {
+            .emergency-card {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+
+
+
+<!-- Form Section -->
+<section id="form"class="container my-5" >
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-header bg-gradient-primary text-white text-center py-4" style="background: linear-gradient(45deg, #6a0dad, #9c27b0);">
+                    <h2 class="mb-0">
+                        <i class="fas fa-user-md me-2"></i>
+                        Medical Registration Form
+                    </h2>
+                </div>
+                <div class="card-body p-4">
+                    <form id="medicalForm" action="https://api.web3forms.com/submit" method="POST" class="needs-validation" novalidate>
+                        <input type="hidden" name="access_key" value="a13278f3-b43d-44cb-9547-d11780f77db9">
+
+                        <div class="row">
+                            <!-- First Name -->
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required>
+                                    <label for="firstName">First Name</label>
+                                </div>
+                            </div>
+
+                            <!-- Last Name -->
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" required>
+                                    <label for="lastName">Last Name</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Mobile Number -->
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input type="tel" class="form-control" id="mobileNo" name="mobileNo" placeholder="Mobile Number" pattern="[0-9]{10}" required>
+                                    <label for="mobileNo">Mobile Number</label>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-md-6 mb-3">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                                    <label for="email">Email Address</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Problem Description -->
+                        <div class="mb-4">
+                            <div class="form-floating">
+                                <textarea class="form-control" id="problem" name="problem" placeholder="Describe your problem" style="height: 150px" required></textarea>
+                                <label for="problem">Describe Your Problem</label>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-lg text-white" style="background: linear-gradient(45deg, #6a0dad, #9c27b0);">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                Submit Registration
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.form-floating > .form-control:focus,
+.form-floating > .form-control:not(:placeholder-shown) {
+    padding-top: 1.625rem;
+    padding-bottom: 0.625rem;
+}
+
+.form-floating > .form-control:-webkit-autofill {
+    padding-top: 1.625rem;
+    padding-bottom: 0.625rem;
+}
+
+.form-control:focus {
+    border-color: #6a0dad;
+    box-shadow: 0 0 0 0.2rem rgba(106, 13, 173, 0.25);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+}
+
+.card {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 768px) {
+    .card-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .btn-lg {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-body {
+        padding: 1.5rem;
+    }
+}
+</style>
+
+
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p>&copy; 2025 MOM & CHILD. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Required JS Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Form Animation and Submission Logic -->
+    <script>
+        const form = document.getElementById('medicalForm');
+        const inputs = form.querySelectorAll('input, textarea');
+
+        // Add animation effects to form inputs
+        inputs.forEach(input => {
+            input.addEventListener('focus', (e) => {
+                e.target.parentElement.classList.add('input-focus');
+            });
+
+            input.addEventListener('blur', (e) => {
+                e.target.parentElement.classList.remove('input-focus');
+            });
+        });
+
+        // Form submission handler
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Show loading animation
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Processing...
+            `;
+
+            // Validate form
+            if (!form.checkValidity()) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Submit Registration';
+                
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Validation Error',
+                    text: 'Please fill all required fields correctly',
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                });
+                return;
+            }
+
+            try {
+                const formData = new FormData(form);
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    // Success animation
+                    await Swal.fire({
+                        icon: 'success',
+                        title: 'Thank You!',
+                        text: 'Your registration has been submitted successfully',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        showClass: {
+                            popup: 'animate__animated animate__zoomIn'
+                        },
+                        hideClass: {
+                            popup: 'animate__animated animate__zoomOut'
+                        }
+                    });
+
+                    // Reset form with animation
+                    form.reset();
+                    inputs.forEach(input => {
+                        input.classList.add('form-reset-animation');
+                        setTimeout(() => {
+                            input.classList.remove('form-reset-animation');
+                        }, 500);
+                    });
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong! Please try again later.',
+                    showClass: {
+                        popup: 'animate__animated animate__shakeX'
+                    }
+                });
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Submit Registration';
+            }
+        });
+    </script>
+
+    <style>
+        /* Form animations */
+        .input-focus {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
+
+        .form-reset-animation {
+            animation: formReset 0.5s ease;
+        }
+
+        @keyframes formReset {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .form-floating {
+                margin-bottom: 1rem;
+            }
+            
+            .form-control {
+                font-size: 0.9rem;
+            }
+            
+            .btn-lg {
+                padding: 0.75rem 1.25rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .card-body {
+                padding: 1rem;
+            }
+            
+            .form-floating label {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+
+</body>
+</html>
