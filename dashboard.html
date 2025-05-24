@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MOM & CHILD</title>
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/?size=100&id=SqvibmaLEyHE&format=png&color=000000">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --secondary-color: #f4f0ff;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #9c27b0 100%);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: white !important;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #f0f0f0 !important;
+            transform: translateY(-1px);
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #9c27b0 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+
+        .welcome-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: none;
+            margin-bottom: 30px;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .quick-actions {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #9c27b0 100%);
+            border: none;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            margin: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(106, 13, 173, 0.4);
+            color: white;
+        }
+
+        .recent-activity {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .activity-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .logout-btn {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: #c82333;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-header {
+                padding: 40px 0;
+            }
+            .stat-card {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-heart me-2"></i>MOM & CHILD
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#profile">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#appointments">Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#records">Medical Records</a>
+                    </li>
+                </ul>
+                <div class="navbar-nav">
+                    <span class="navbar-text me-3" id="userGreeting">
+                        <i class="fas fa-user-circle me-2"></i>Loading...
+                    </span>
+                    <button class="btn logout-btn" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt me-2"></i>Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="mb-3">Welcome to Your Health Dashboard</h1>
+                    <p class="lead mb-0">Manage your maternal and child health journey with ease</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="fas fa-baby display-1"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Welcome Card -->
+        <div class="welcome-card" id="welcomeCard">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3 id="userWelcome">Welcome back!</h3>
+                    <p class="mb-0">Your personalized health dashboard is ready to help you track your journey.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="badge bg-success fs-6 p-3">
+                        <i class="fas fa-check-circle me-2"></i>Account Active
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon text-primary">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h4>5</h4>
+                    <p class="text-muted">Upcoming Appointments</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon text-success">
+                        <i class="fas fa-file-medical"></i>
+                    </div>
+                    <h4>12</h4>
+                    <p class="text-muted">Medical Records</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon text-warning">
+                        <i class="fas fa-syringe"></i>
+                    </div>
+                    <h4>8</h4>
+                    <p class="text-muted">Vaccinations</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-icon text-info">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h4>24/7</h4>
+                    <p class="text-muted">AI Assistant</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Quick Actions -->
+            <div class="col-md-6">
+                <div class="quick-actions">
+                    <h4 class="mb-4">
+                        <i class="fas fa-bolt me-2" style="color: var(--primary-color);"></i>
+                        Quick Actions
+                    </h4>
+                    <div class="d-grid gap-3">
+                        <button class="action-btn" onclick="bookAppointment()">
+                            <i class="fas fa-calendar-plus me-2"></i>Book Appointment
+                        </button>
+                        <button class="action-btn" onclick="viewRecords()">
+                            <i class="fas fa-folder-open me-2"></i>View Medical Records
+                        </button>
+                        <button class="action-btn" onclick="chatWithAI()">
+                            <i class="fas fa-robot me-2"></i>Chat with AI Assistant
+                        </button>
+                        <button class="action-btn" onclick="emergencyHelp()">
+                            <i class="fas fa-ambulance me-2"></i>Emergency Help
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="col-md-6">
+                <div class="recent-activity">
+                    <h4 class="mb-4">
+                        <i class="fas fa-clock me-2" style="color: var(--primary-color);"></i>
+                        Recent Activity
+                    </h4>
+                    <div class="activity-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">Consultation Booked</h6>
+                                <small class="text-muted">Dr. Sarah Johnson - Pediatrics</small>
+                            </div>
+                            <small class="text-muted">2 hours ago</small>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">Vaccination Reminder</h6>
+                                <small class="text-muted">MMR vaccine due in 3 days</small>
+                            </div>
+                            <small class="text-muted">1 day ago</small>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">AI Health Check</h6>
+                                <small class="text-muted">Completed health assessment</small>
+                            </div>
+                            <small class="text-muted">3 days ago</small>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">Profile Updated</h6>
+                                <small class="text-muted">Emergency contact information</small>
+                            </div>
+                            <small class="text-muted">1 week ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module">
+        import { observeAuthState, logoutUser, getUserData } from './firebase-config.js';
+
+        const userGreeting = document.getElementById('userGreeting');
+        const userWelcome = document.getElementById('userWelcome');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Check authentication state
+        observeAuthState(async (user) => {
+            if (user) {
+                // User is signed in
+                const userData = await getUserData(user.uid);
+                if (userData.success) {
+                    const data = userData.data;
+                    userGreeting.innerHTML = `<i class="fas fa-user-circle me-2"></i>Hello, ${data.firstName}!`;
+                    userWelcome.textContent = `Welcome back, ${data.firstName} ${data.lastName}!`;
+                } else {
+                    userGreeting.innerHTML = `<i class="fas fa-user-circle me-2"></i>Hello, ${user.displayName || 'User'}!`;
+                    userWelcome.textContent = `Welcome back, ${user.displayName || 'User'}!`;
+                }
+            } else {
+                // User is signed out
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Logout functionality
+        logoutBtn.addEventListener('click', async () => {
+            const result = await Swal.fire({
+                title: 'Are you sure?',
+                text: 'You will be logged out of your account.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#6a0dad',
+                cancelButtonColor: '#dc3545',
+                confirmButtonText: 'Yes, logout'
+            });
+
+            if (result.isConfirmed) {
+                const logoutResult = await logoutUser();
+                if (logoutResult.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Logged out successfully!',
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(() => {
+                        window.location.href = 'login.html';
+                    });
+                }
+            }
+        });
+
+        // Quick action functions
+        window.bookAppointment = function() {
+            Swal.fire({
+                title: 'Book Appointment',
+                text: 'This feature will be available soon!',
+                icon: 'info',
+                confirmButtonColor: '#6a0dad'
+            });
+        };
+
+        window.viewRecords = function() {
+            Swal.fire({
+                title: 'Medical Records',
+                text: 'This feature will be available soon!',
+                icon: 'info',
+                confirmButtonColor: '#6a0dad'
+            });
+        };
+
+        window.chatWithAI = function() {
+            // Redirect to the AI chat section on the main page
+            window.location.href = 'index.html#chat-ai';
+        };
+
+        window.emergencyHelp = function() {
+            // Redirect to emergency section on the main page
+            window.location.href = 'index.html#emergency';
+        };
+    </script>
+</body>
+</html>

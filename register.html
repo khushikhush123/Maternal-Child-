@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - MOM & CHILD</title>
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/?size=100&id=SqvibmaLEyHE&format=png&color=000000">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --secondary-color: #f4f0ff;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #9c27b0 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .register-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            overflow: hidden;
+            max-width: 1000px;
+            width: 100%;
+            min-height: 700px;
+        }
+
+        .register-left {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #9c27b0 100%);
+            color: white;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .register-right {
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .brand-logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .form-floating > .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(106, 13, 173, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #9c27b0 100%);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(106, 13, 173, 0.4);
+        }
+
+        .btn-google {
+            background-color: #db4437;
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-google:hover {
+            background-color: #c23321;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(219, 68, 55, 0.4);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 20px;
+            color: #666;
+        }
+
+        .alert {
+            border-radius: 10px;
+            border: none;
+        }
+
+        .password-strength {
+            margin-top: 5px;
+            font-size: 0.8rem;
+        }
+
+        .strength-weak { color: #dc3545; }
+        .strength-medium { color: #ffc107; }
+        .strength-strong { color: #198754; }
+
+        @media (max-width: 768px) {
+            .register-left {
+                padding: 40px 30px;
+            }
+            .register-right {
+                padding: 40px 30px;
+            }
+            .brand-logo {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="row g-0 h-100">
+            <div class="col-lg-6 register-left">
+                <div>
+                    <div class="brand-logo">MOM&CHILD</div>
+                    <h3 class="mb-4">Join Our Family!</h3>
+                    <p class="mb-4">Start your journey towards better maternal and child health</p>
+                    <div class="features">
+                        <div class="mb-3">
+                            <i class="fas fa-baby me-2"></i>
+                            Pregnancy Tracking
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-heartbeat me-2"></i>
+                            Health Monitoring
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-robot me-2"></i>
+                            AI Health Assistant
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-calendar-check me-2"></i>
+                            Appointment Scheduling
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 register-right">
+                <div class="w-100">
+                    <h2 class="text-center mb-4" style="color: var(--primary-color);">Create Account</h2>
+                    
+                    <div id="alertContainer"></div>
+                    
+                    <form id="registerForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
+                                    <label for="firstName">First Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                                    <label for="lastName">Last Name</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                            <label for="email">Email address</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="tel" class="form-control" id="mobileNo" placeholder="Mobile Number" pattern="[0-9]{10}" required>
+                            <label for="mobileNo">Mobile Number</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="userType" required>
+                                <option value="">Choose...</option>
+                                <option value="patient">Patient</option>
+                                <option value="expectant-mother">Expectant Mother</option>
+                                <option value="new-mother">New Mother</option>
+                                <option value="healthcare-provider">Healthcare Provider</option>
+                            </select>
+                            <label for="userType">User Type</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="password" placeholder="Password" required minlength="6">
+                            <label for="password">Password</label>
+                            <div id="passwordStrength" class="password-strength"></div>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
+                            <label for="confirmPassword">Confirm Password</label>
+                        </div>
+                        
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                            <label class="form-check-label" for="agreeTerms">
+                                I agree to the <a href="#" style="color: var(--primary-color);">Terms of Service</a> and 
+                                <a href="#" style="color: var(--primary-color);">Privacy Policy</a>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100 mb-3" id="registerBtn">
+                            <i class="fas fa-user-plus me-2"></i>Create Account
+                        </button>
+                    </form>
+                    
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+                    
+                    <button type="button" class="btn btn-google w-100 mb-3" id="googleRegisterBtn">
+                        <i class="fab fa-google me-2"></i>Sign up with Google
+                    </button>
+                    
+                    <div class="text-center">
+                        <p class="mb-0">Already have an account? 
+                            <a href="login.html" class="text-decoration-none" style="color: var(--primary-color);">Sign in</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module">
+        import { registerUser, loginWithGoogle, observeAuthState } from './firebase-config.js';
+
+        const registerForm = document.getElementById('registerForm');
+        const registerBtn = document.getElementById('registerBtn');
+        const googleRegisterBtn = document.getElementById('googleRegisterBtn');
+        const alertContainer = document.getElementById('alertContainer');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const passwordStrength = document.getElementById('passwordStrength');
+
+        // Check if user is already logged in
+        observeAuthState((user) => {
+            if (user) {
+                window.location.href = 'dashboard.html';
+            }
+        });
+
+        function showAlert(message, type = 'danger') {
+            alertContainer.innerHTML = `
+                <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+        }
+
+        function setLoading(isLoading) {
+            if (isLoading) {
+                registerBtn.disabled = true;
+                registerBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Creating account...';
+                googleRegisterBtn.disabled = true;
+            } else {
+                registerBtn.disabled = false;
+                registerBtn.innerHTML = '<i class="fas fa-user-plus me-2"></i>Create Account';
+                googleRegisterBtn.disabled = false;
+            }
+        }
+
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            let message = '';
+            
+            if (password.length >= 8) strength++;
+            if (password.match(/[a-z]/)) strength++;
+            if (password.match(/[A-Z]/)) strength++;
+            if (password.match(/[0-9]/)) strength++;
+            if (password.match(/[^a-zA-Z0-9]/)) strength++;
+            
+            if (strength < 3) {
+                message = 'Weak password';
+                passwordStrength.className = 'password-strength strength-weak';
+            } else if (strength < 4) {
+                message = 'Medium password';
+                passwordStrength.className = 'password-strength strength-medium';
+            } else {
+                message = 'Strong password';
+                passwordStrength.className = 'password-strength strength-strong';
+            }
+            
+            passwordStrength.textContent = message;
+        }
+
+        passwordInput.addEventListener('input', (e) => {
+            checkPasswordStrength(e.target.value);
+        });
+
+        confirmPasswordInput.addEventListener('input', (e) => {
+            if (passwordInput.value !== e.target.value) {
+                e.target.setCustomValidity('Passwords do not match');
+            } else {
+                e.target.setCustomValidity('');
+            }
+        });
+
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                mobileNo: document.getElementById('mobileNo').value,
+                userType: document.getElementById('userType').value,
+                password: document.getElementById('password').value,
+                confirmPassword: document.getElementById('confirmPassword').value
+            };
+            
+            // Validation
+            if (Object.values(formData).some(value => !value)) {
+                showAlert('Please fill in all fields.');
+                return;
+            }
+            
+            if (formData.password !== formData.confirmPassword) {
+                showAlert('Passwords do not match.');
+                return;
+            }
+            
+            if (formData.password.length < 6) {
+                showAlert('Password must be at least 6 characters long.');
+                return;
+            }
+            
+            if (!document.getElementById('agreeTerms').checked) {
+                showAlert('Please agree to the Terms of Service and Privacy Policy.');
+                return;
+            }
+
+            setLoading(true);
+            
+            const result = await registerUser(formData.email, formData.password, formData);
+              if (result.success) {
+                // Check for redirect URL stored from protected page
+                const redirectUrl = sessionStorage.getItem('redirectAfterLogin');
+                sessionStorage.removeItem('redirectAfterLogin'); // Clear after use
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Welcome to MOM & CHILD!',
+                    text: 'Your account has been created successfully.',
+                    timer: 3000,
+                    showConfirmButton: false
+                }).then(() => {
+                    // Redirect to original page or dashboard
+                    window.location.href = redirectUrl || 'dashboard.html';
+                });
+            } else {
+                showAlert(result.error);
+                setLoading(false);
+            }
+        });
+
+        googleRegisterBtn.addEventListener('click', async () => {
+            setLoading(true);
+            
+            const result = await loginWithGoogle();
+            
+            if (result.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Welcome to MOM & CHILD!',
+                    text: 'Your account has been created successfully with Google.',
+                    timer: 3000,
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.href = 'dashboard.html';
+                });
+            } else {
+                showAlert(result.error);
+                setLoading(false);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Test - MOM & CHILD</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-item {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #ccc;
+        }
+        .success {
+            background-color: #d4edda;
+            border-left-color: #28a745;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            border-left-color: #dc3545;
+            color: #721c24;
+        }
+        .info {
+            background-color: #d1ecf1;
+            border-left-color: #17a2b8;
+            color: #0c5460;
+        }
+        .loading {
+            background-color: #fff3cd;
+            border-left-color: #ffc107;
+            color: #856404;
+        }
+        button {
+            background: linear-gradient(135deg, #6a0dad 0%, #9c27b0 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .config-display {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔥 Firebase Connection Test</h1>
+        <p>This page will help you verify that Firebase is properly configured for your MOM & CHILD healthcare website.</p>
+        
+        <div id="testResults">
+            <div class="test-item loading">
+                <strong>🔄 Initializing Firebase Tests...</strong>
+                <p>Please wait while we test your Firebase configuration.</p>
+            </div>
+        </div>
+
+        <div style="margin: 20px 0;">
+            <button onclick="runTests()">🔄 Run Tests Again</button>
+            <button onclick="testAuth()">🔐 Test Authentication</button>
+            <button onclick="testFirestore()">🗄️ Test Firestore</button>
+        </div>
+
+        <div class="config-display" id="configDisplay"></div>
+    </div>
+
+    <script type="module">
+        import { auth, db } from './firebase-config.js';
+        import { 
+            createUserWithEmailAndPassword, 
+            signInWithEmailAndPassword,
+            signOut 
+        } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { 
+            doc, 
+            setDoc, 
+            getDoc 
+        } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        const testResults = document.getElementById('testResults');
+        const configDisplay = document.getElementById('configDisplay');
+
+        function addTestResult(message, type = 'info', details = '') {
+            const testItem = document.createElement('div');
+            testItem.className = `test-item ${type}`;
+            testItem.innerHTML = `
+                <strong>${message}</strong>
+                ${details ? `<p>${details}</p>` : ''}
+            `;
+            testResults.appendChild(testItem);
+        }
+
+        function clearResults() {
+            testResults.innerHTML = '';
+        }
+
+        function showConfig() {
+            try {
+                const config = {
+                    apiKey: auth.app.options.apiKey ? '✓ Set' : '❌ Missing',
+                    authDomain: auth.app.options.authDomain ? '✓ Set' : '❌ Missing',
+                    projectId: auth.app.options.projectId ? '✓ Set' : '❌ Missing',
+                    storageBucket: auth.app.options.storageBucket ? '✓ Set' : '❌ Missing',
+                    messagingSenderId: auth.app.options.messagingSenderId ? '✓ Set' : '❌ Missing',
+                    appId: auth.app.options.appId ? '✓ Set' : '❌ Missing'
+                };
+                
+                configDisplay.textContent = `Firebase Configuration Status:
+${JSON.stringify(config, null, 2)}
+
+Project ID: ${auth.app.options.projectId || 'Not configured'}
+Auth Domain: ${auth.app.options.authDomain || 'Not configured'}`;
+            } catch (error) {
+                configDisplay.textContent = `Error reading config: ${error.message}`;
+            }
+        }
+
+        async function runTests() {
+            clearResults();
+            showConfig();
+            
+            addTestResult('🔄 Starting Firebase Tests...', 'loading');
+
+            // Test 1: Firebase initialization
+            try {
+                if (auth && db) {
+                    addTestResult('✅ Firebase SDK Loaded', 'success', 'Firebase Authentication and Firestore are properly initialized.');
+                } else {
+                    throw new Error('Firebase services not available');
+                }
+            } catch (error) {
+                addTestResult('❌ Firebase SDK Failed', 'error', `Error: ${error.message}`);
+                return;
+            }
+
+            // Test 2: Check configuration
+            try {
+                const config = auth.app.options;
+                if (config.apiKey && config.projectId && config.authDomain) {
+                    addTestResult('✅ Firebase Configuration Valid', 'success', `Project: ${config.projectId}`);
+                } else {
+                    throw new Error('Missing required configuration parameters');
+                }
+            } catch (error) {
+                addTestResult('❌ Firebase Configuration Invalid', 'error', error.message);
+                return;
+            }
+
+            // Test 3: Authentication service
+            try {
+                const currentUser = auth.currentUser;
+                addTestResult('✅ Authentication Service Ready', 'success', 
+                    currentUser ? `Current user: ${currentUser.email}` : 'No user currently signed in.');
+            } catch (error) {
+                addTestResult('❌ Authentication Service Failed', 'error', error.message);
+            }
+
+            // Test 4: Firestore service
+            try {
+                // Try to access Firestore
+                const testDoc = doc(db, 'test', 'connection');
+                addTestResult('✅ Firestore Service Ready', 'success', 'Firestore database connection established.');
+            } catch (error) {
+                addTestResult('❌ Firestore Service Failed', 'error', error.message);
+            }
+
+            addTestResult('🎉 Tests Complete!', 'info', 'Check the results above. If you see any errors, refer to the setup guide.');
+        }
+
+        async function testAuth() {
+            addTestResult('🔐 Testing Authentication...', 'loading');
+            
+            const testEmail = 'test@example.com';
+            const testPassword = 'testpassword123';
+            
+            try {
+                // Try to create a test user (this will fail if user exists, which is fine)
+                await createUserWithEmailAndPassword(auth, testEmail, testPassword);
+                addTestResult('✅ Test User Created', 'success', 'Authentication is working correctly.');
+                
+                // Clean up - sign out the test user
+                await signOut(auth);
+                
+            } catch (error) {
+                if (error.code === 'auth/email-already-in-use') {
+                    addTestResult('✅ Authentication Working', 'success', 'Email already exists - this means auth is functioning.');
+                } else {
+                    addTestResult('❌ Authentication Error', 'error', error.message);
+                }
+            }
+        }
+
+        async function testFirestore() {
+            addTestResult('🗄️ Testing Firestore...', 'loading');
+            
+            try {
+                const testDoc = doc(db, 'test', 'firebase-test');
+                const testData = {
+                    message: 'Firebase test successful',
+                    timestamp: new Date(),
+                    test: true
+                };
+                
+                await setDoc(testDoc, testData);
+                addTestResult('✅ Firestore Write Test Passed', 'success', 'Successfully wrote test data to Firestore.');
+                
+                const docSnap = await getDoc(testDoc);
+                if (docSnap.exists()) {
+                    addTestResult('✅ Firestore Read Test Passed', 'success', 'Successfully read test data from Firestore.');
+                } else {
+                    throw new Error('Document not found after writing');
+                }
+                
+            } catch (error) {
+                addTestResult('❌ Firestore Test Failed', 'error', error.message);
+            }
+        }
+
+        // Make functions globally available
+        window.runTests = runTests;
+        window.testAuth = testAuth;
+        window.testFirestore = testFirestore;
+
+        // Auto-run tests when page loads
+        window.addEventListener('load', () => {
+            setTimeout(runTests, 1000);
+        });
+    </script>
+</body>
+</html>
