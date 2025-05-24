@@ -194,8 +194,8 @@
                         <span>or</span>
                     </div>
                     
-                    <button type="button" class="btn btn-google w-100 mb-3" id="LoginBtn">
-                        <i class=""></i>
+                    <button type="button" class="btn btn-google w-100 mb-3" id="googleLoginBtn">
+                        <i class="fab fa-google me-2"></i>Continue with Google
                     </button>
                     
                     <div class="text-center">
@@ -260,11 +260,8 @@
             setLoading(true);
             
             const result = await loginUser(email, password);
-              if (result.success) {
-                // Check for redirect URL stored from protected page
-                const redirectUrl = sessionStorage.getItem('redirectAfterLogin');
-                sessionStorage.removeItem('redirectAfterLogin'); // Clear after use
-                
+            
+            if (result.success) {
                 Swal.fire({
                     icon: 'success',
                     title: 'Welcome back!',
@@ -272,8 +269,7 @@
                     timer: 2000,
                     showConfirmButton: false
                 }).then(() => {
-                    // Redirect to original page or dashboard
-                    window.location.href = redirectUrl || 'dashboard.html';
+                    window.location.href = 'dashboard.html';
                 });
             } else {
                 showAlert(result.error);
@@ -285,11 +281,8 @@
             setLoading(true);
             
             const result = await loginWithGoogle();
-              if (result.success) {
-                // Check for redirect URL stored from protected page
-                const redirectUrl = sessionStorage.getItem('redirectAfterLogin');
-                sessionStorage.removeItem('redirectAfterLogin'); // Clear after use
-                
+            
+            if (result.success) {
                 Swal.fire({
                     icon: 'success',
                     title: 'Welcome!',
@@ -297,8 +290,7 @@
                     timer: 2000,
                     showConfirmButton: false
                 }).then(() => {
-                    // Redirect to original page or dashboard
-                    window.location.href = redirectUrl || 'dashboard.html';
+                    window.location.href = 'dashboard.html';
                 });
             } else {
                 showAlert(result.error);
