@@ -64,6 +64,16 @@
             font-size: 1.5rem;
         }
 
+        /* Hero CTA Button Styles */
+        .hero .btn {
+            transition: all 0.3s ease;
+        }
+
+        .hero .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
         /* Section Styles */
         .section-title {
             color: var(--primary-color);
@@ -118,6 +128,33 @@
             background-color: #f0f0f0;
         }
 
+        /* Floating Action Button */
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #9c27b0 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            box-shadow: 0 4px 15px rgba(106, 13, 173, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+
+        .floating-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(106, 13, 173, 0.6);
+            color: white;
+        }
+
         /* Responsive Design */
         @media (max-width: 1200px) {
             .hero h1 {
@@ -138,12 +175,20 @@
             .hero p {
                 font-size: 1.2rem;
             }
+            .hero .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            .hero .btn.me-3 {
+                margin-right: 0 !important;
+            }
             .section-padding {
                 padding: 50px 0;
             }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 576px) {
             .hero h1 {
                 font-size: 2rem;
             }
@@ -174,13 +219,13 @@
                         <a class="nav-link" href="#topics">Health Topics</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#documents">Documents</a>
+                        <a class="nav-link" href="appointments.html">Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="resources.html">Resources</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#chat-ai">Chat AI</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#countries">Countries</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#emergency">Emergency</a>
@@ -267,6 +312,14 @@
         <div class="container hero-content">
             <h1>Maternal & Child Health</h1>
             <p>Ensuring a healthier future for mothers and children worldwide</p>
+            <div class="mt-4">
+                <a href="appointments.html" class="btn btn-primary btn-lg me-3 mb-2" style="background: linear-gradient(135deg, var(--primary-color) 0%, #9c27b0 100%); border: none; border-radius: 50px; padding: 12px 30px;">
+                    <i class="fas fa-calendar-plus me-2"></i>Book Appointment
+                </a>
+                <a href="resources.html" class="btn btn-outline-light btn-lg mb-2" style="border-radius: 50px; padding: 12px 30px;">
+                    <i class="fas fa-book-medical me-2"></i>Medical Resources
+                </a>
+            </div>
         </div>
     </header>
 

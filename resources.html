@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Resources - MOM & CHILD</title>
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/?size=100&id=SqvibmaLEyHE&format=png&color=000000">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --secondary-color: #f4f0ff;
+            --text-color: #333;
+            --accent-color: #9c27b0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="1000,100 1000,0 0,100"/></svg>');
+            background-size: cover;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-color) !important;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-color) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .search-section {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin: -50px auto 50px;
+            max-width: 800px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .search-input {
+            border: 2px solid #e9ecef;
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(106, 13, 173, 0.25);
+        }
+
+        .search-btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 15px 30px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(106, 13, 173, 0.4);
+        }
+
+        .filter-tabs {
+            margin-bottom: 40px;
+        }
+
+        .filter-tab {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 50px;
+            padding: 12px 25px;
+            margin: 5px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .filter-tab:hover,
+        .filter-tab.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: none;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .resource-card .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            border: none;
+            padding: 20px;
+            position: relative;
+        }
+
+        .resource-type-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .impact-factor {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary-color);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .resource-content {
+            padding: 25px;
+        }
+
+        .resource-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .resource-description {
+            color: var(--text-color);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .resource-tags {
+            margin-bottom: 20px;
+        }
+
+        .resource-tag {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin: 2px;
+            display: inline-block;
+        }
+
+        .view-btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 25px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .view-btn:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(106, 13, 173, 0.4);
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            padding: 60px 0;
+            margin: 80px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .floating-icons {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            opacity: 0.1;
+            font-size: 80px;
+            color: white;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .modal-content {
+            border-radius: 20px;
+            border: none;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .pdf-viewer {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 80px 0 60px;
+            }
+            
+            .search-section {
+                margin: -30px 20px 30px;
+                padding: 20px;
+            }
+            
+            .resource-card {
+                margin-bottom: 20px;
+            }
+            
+            .floating-icons {
+                display: none;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .filter-tab {
+                display: block;
+                text-align: center;
+                margin: 10px 0;
+            }
+            
+            .pdf-viewer {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-heartbeat me-2"></i>
+                MOM & CHILD
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="appointments.html">Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="resources.html">Resources</a>
+                    </li>
+                    <li class="nav-item" id="authButtons">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item" id="registerButton">
+                        <a class="nav-link" href="register.html">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="floating-icons">
+            <i class="fas fa-file-medical"></i>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold mb-4">Medical Resources & Research</h1>
+                    <p class="lead mb-0">Access peer-reviewed journals, IEEE papers, and verified medical resources for maternal and child healthcare</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <div class="container">
+        <div class="search-section">
+            <div class="row g-3">
+                <div class="col-md-9">
+                    <input type="text" id="searchInput" class="form-control search-input" placeholder="Search for papers, journals, or topics...">
+                </div>
+                <div class="col-md-3">
+                    <button class="btn search-btn w-100" onclick="searchResources()">
+                        <i class="fas fa-search me-2"></i>Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="container">
+        <div class="filter-tabs text-center">
+            <a href="#" class="filter-tab active" onclick="filterResources('all')">All Resources</a>
+            <a href="#" class="filter-tab" onclick="filterResources('ieee')">IEEE Papers</a>
+            <a href="#" class="filter-tab" onclick="filterResources('journal')">Medical Journals</a>
+            <a href="#" class="filter-tab" onclick="filterResources('conference')">Conference Papers</a>
+            <a href="#" class="filter-tab" onclick="filterResources('review')">Review Articles</a>
+        </div>
+    </div>
+
+    <!-- Resources Grid -->
+    <div class="container">
+        <div class="row g-4" id="resourcesGrid">
+            <!-- IEEE Papers -->
+            <div class="col-lg-4 col-md-6 resource-item" data-category="ieee">
+                <div class="card resource-card">
+                    <div class="card-header">
+                        <span class="resource-type-badge">IEEE</span>
+                        <h5 class="mb-2">Machine Learning in Prenatal Care Prediction</h5>
+                        <div class="impact-factor">Impact Factor: 4.2</div>
+                    </div>
+                    <div class="resource-content">
+                        <div class="resource-meta">
+                            <span><i class="fas fa-calendar me-1"></i>2024</span>
+                            <span><i class="fas fa-download me-1"></i>1.2k</span>
+                            <span><i class="fas fa-quote-left me-1"></i>89 Citations</span>
+                        </div>
+                        <div class="resource-description">
+                            Advanced machine learning algorithms for predicting complications in prenatal care, improving early detection and intervention strategies.
+                        </div>
+                        <div class="resource-tags">
+                            <span class="resource-tag">AI/ML</span>
+                            <span class="resource-tag">Prenatal Care</span>
+                            <span class="resource-tag">Predictive Analytics</span>
+                        </div>
+                        <a href="https://ieeexplore.ieee.org/document/10493737/" class="view-btn" onclick="viewResource('ieee-ml-prenatal', 'Machine Learning in Prenatal Care Prediction')">
+                            <i class="fas fa-eye me-2"></i>View Paper
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 resource-item" data-category="ieee">
+                <div class="card resource-card">
+                    <div class="card-header">
+                        <span class="resource-type-badge">IEEE</span>
+                        <h5 class="mb-2">IoT-Based Maternal Health Monitoring System</h5>
+                        <div class="impact-factor">Impact Factor: 3.8</div>
+                    </div>
+                    <div class="resource-content">
+                        <div class="resource-meta">
+                            <span><i class="fas fa-calendar me-1"></i>2024</span>
+                            <span><i class="fas fa-download me-1"></i>856</span>
+                            <span><i class="fas fa-quote-left me-1"></i>67 Citations</span>
+                        </div>
+                        <div class="resource-description">
+                            Comprehensive IoT framework for continuous monitoring of maternal vital signs and fetal development during pregnancy.
+                        </div>
+                        <div class="resource-tags">
+                            <span class="resource-tag">IoT</span>
+                            <span class="resource-tag">Remote Monitoring</span>
+                            <span class="resource-tag">Maternal Health</span>
+                        </div>
+                        <a href="https://ieeexplore.ieee.org/document/8648673" class="view-btn" onclick="viewResource('ieee-iot-maternal', 'IoT-Based Maternal Health Monitoring System')">
+                            <i class="fas fa-eye me-2"></i>View Paper
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Medical Journals -->
+            <div class="col-lg-4 col-md-6 resource-item" data-category="journal">
+                <div class="card resource-card">
+                    <div class="card-header">
+                        <span class="resource-type-badge">NEJM</span>
+                        <h5 class="mb-2">Advances in Neonatal Intensive Care</h5>
+                        <div class="impact-factor">Impact Factor: 176.1</div>
+                    </div>
+                    <div class="resource-content">
+                        <div class="resource-meta">
+                            <span><i class="fas fa-calendar me-1"></i>2024</span>
+                            <span><i class="fas fa-download me-1"></i>2.1k</span>
+                            <span><i class="fas fa-quote-left me-1"></i>234 Citations</span>
+                        </div>
+                        <div class="resource-description">
+                            Latest developments in neonatal care technology and treatment protocols for premature infants and critical care management.
+                        </div>
+                        <div class="resource-tags">
+                            <span class="resource-tag">Neonatal Care</span>
+                            <span class="resource-tag">NICU</span>
+                            <span class="resource-tag">Critical Care</span>
+                        </div>
+                        <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa011921#:~:text=Neonatal%20intensive%20care%20has%20reduced,of%20neonatal%20intensive%20care%20units.&text=Advances%20in%20neonatology%20have%20been,intensive%20care%20units%20and%20neonatologists." class="view-btn" onclick="viewResource('nejm-neonatal', 'Advances in Neonatal Intensive Care')">
+                            <i class="fas fa-eye me-2"></i>View Article
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 resource-item" data-category="journal">
+                <div class="card resource-card">
+                    <div class="card-header">
+                        <span class="resource-type-badge">IEEE</span>
+                        <h5 class="mb-2">Global Maternal Mortality Trends</h5>
+                        <div class="impact-factor">Impact Factor: 202.7</div>
+                    </div>
+                    <div class="resource-content">
+                        <div class="resource-meta">
+                            <span><i class="fas fa-calendar me-1"></i>2024</span>
+                            <span><i class="fas fa-download me-1"></i>3.4k</span>
+                            <span><i class="fas fa-quote-left me-1"></i>456 Citations</span>
+                        </div>
+                        <div class="resource-description">
+                            Comprehensive analysis of global maternal mortality trends and effective interventions for reducing maternal deaths worldwide.
+                        </div>
+                        <div class="resource-tags">
+                            <span class="resource-tag">Maternal Mortality</span>
+                            <span class="resource-tag">Global Health</span>
+                            <span class="resource-tag">Epidemiology</span>
+                        </div>
+                        <a href="https://ieeexplore.ieee.org/document/10957396" class="view-btn" onclick="viewResource('lancet-mortality', 'Global Maternal Mortality Trends')">
+                            <i class="fas fa-eye me-2"></i>View Article
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conference Papers -->
+            <div class="col-lg-4 col-md-6 resource-item" data-category="conference">
+                <div class="card resource-card">
+                    <div class="card-header">
+                        <span class="resource-type-badge">IEEE</span>
+                        <h5 class="mb-2">AI in Pediatric Diagnosis</h5>
+                        <div class="impact-factor">Conference: ICMHI 2024</div>
+                    </div>
+                    <div class="resource-content">
+                        <div class="resource-meta">
+                            <span><i class="fas fa-calendar me-1"></i>2024</span>
+                            <span><i class="fas fa-download me-1"></i>678</span>
+                            <span><i class="fas fa-quote-left me-1"></i>45 Citations</span>
+                        </div>
+                        <div class="resource-description">
+                            Novel applications of artificial intelligence in pediatric diagnosis and treatment decision support systems.
+                        </div>
+                        <div class="resource-tags">
+                            <span class="resource-tag">Pediatric AI</span>
+                            <span class="resource-tag">Diagnosis</span>
+                            <span class="resource-tag">Decision Support</span>
+                        </div>
+                        <a href="https://ieeexplore.ieee.org/document/10532451" class="view-btn" onclick="viewResource('icmhi-pediatric-ai', 'AI in Pediatric Diagnosis')">
+                            <i class="fas fa-eye me-2"></i>View Paper
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 resource-item" data-category="review">
+                <div class="card resource-card">
+                    <div class="card-header">
+                        <span class="resource-type-badge">Review</span>
+                        <h5 class="mb-2">Telemedicine in Maternal Health</h5>
+                        <div class="impact-factor">Systematic Review</div>
+                    </div>
+                    <div class="resource-content">
+                        <div class="resource-meta">
+                            <span><i class="fas fa-calendar me-1"></i>2024</span>
+                            <span><i class="fas fa-download me-1"></i>1.5k</span>
+                            <span><i class="fas fa-quote-left me-1"></i>123 Citations</span>
+                        </div>
+                        <div class="resource-description">
+                            Systematic review of telemedicine applications in maternal healthcare and their effectiveness in improving outcomes.
+                        </div>
+                        <div class="resource-tags">
+                            <span class="resource-tag">Telemedicine</span>
+                            <span class="resource-tag">Systematic Review</span>
+                            <span class="resource-tag">Digital Health</span>
+                        </div>
+                        <a href="https://ieeexplore.ieee.org/document/5441583" class="view-btn" onclick="viewResource('review-telemedicine', 'Telemedicine in Maternal Health')">
+                            <i class="fas fa-eye me-2"></i>View Review
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Resources -->
+            <div class="col-lg-4 col-md-6 resource-item" data-category="ieee">
+                <div class="card resource-card">
+                    <div class="card-header">
+                        <span class="resource-type-badge">IEEE</span>
+                        <h5 class="mb-2">Blockchain in Healthcare Data Management</h5>
+                        <div class="impact-factor">Impact Factor: 5.1</div>
+                    </div>
+                    <div class="resource-content">
+                        <div class="resource-meta">
+                            <span><i class="fas fa-calendar me-1"></i>2024</span>
+                            <span><i class="fas fa-download me-1"></i>923</span>
+                            <span><i class="fas fa-quote-left me-1"></i>78 Citations</span>
+                        </div>
+                        <div class="resource-description">
+                            Implementing blockchain technology for secure and interoperable healthcare data management in maternal and child health systems.
+                        </div>
+                        <div class="resource-tags">
+                            <span class="resource-tag">Blockchain</span>
+                            <span class="resource-tag">Data Security</span>
+                            <span class="resource-tag">Healthcare IT</span>
+                        </div>
+                        <a href="https://ieeexplore.ieee.org/document/10029059" class="view-btn" onclick="viewResource('ieee-blockchain', 'Blockchain in Healthcare Data Management')">
+                            <i class="fas fa-eye me-2"></i>View Paper
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 resource-item" data-category="journal">
+                <div class="card resource-card">
+                    <div class="card-header">
+                        <span class="resource-type-badge">IEEE</span>
+                        <h5 class="mb-2">Postpartum Depression Prevention</h5>
+                        <div class="impact-factor">Impact Factor: 157.3</div>
+                    </div>
+                    <div class="resource-content">
+                        <div class="resource-meta">
+                            <span><i class="fas fa-calendar me-1"></i>2024</span>
+                            <span><i class="fas fa-download me-1"></i>1.8k</span>
+                            <span><i class="fas fa-quote-left me-1"></i>189 Citations</span>
+                        </div>
+                        <div class="resource-description">
+                            Evidence-based strategies for preventing and treating postpartum depression through early intervention and support systems.
+                        </div>
+                        <div class="resource-tags">
+                            <span class="resource-tag">Mental Health</span>
+                            <span class="resource-tag">Postpartum Care</span>
+                            <span class="resource-tag">Prevention</span>
+                        </div>
+                        <a href="https://ieeexplore.ieee.org/abstract/document/10142970" class="view-btn" onclick="viewResource('jama-depression', 'Postpartum Depression Prevention')">
+                            <i class="fas fa-eye me-2"></i>View Article
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 resource-item" data-category="conference">
+                <div class="card resource-card">
+                    <div class="card-header">
+                        <span class="resource-type-badge">IEEE</span>
+                        <h5 class="mb-2">Mobile Health Apps for Pregnancy</h5>
+                        <div class="impact-factor">Conference: HIMSS 2024</div>
+                    </div>
+                    <div class="resource-content">
+                        <div class="resource-meta">
+                            <span><i class="fas fa-calendar me-1"></i>2024</span>
+                            <span><i class="fas fa-download me-1"></i>567</span>
+                            <span><i class="fas fa-quote-left me-1"></i>34 Citations</span>
+                        </div>
+                        <div class="resource-description">
+                            Evaluation of mobile health applications for pregnancy monitoring and their impact on maternal health outcomes.
+                        </div>
+                        <div class="resource-tags">
+                            <span class="resource-tag">mHealth</span>
+                            <span class="resource-tag">Mobile Apps</span>
+                            <span class="resource-tag">Pregnancy Care</span>
+                        </div>
+                        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10768378/" class="view-btn" onclick="viewResource('himss-mhealth', 'Mobile Health Apps for Pregnancy')">
+                            <i class="fas fa-eye me-2"></i>View Paper
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <!-- Document Viewer Modal -->
+    <div class="modal fade" id="documentModal" tabindex="-1" aria-labelledby="documentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="documentModalLabel">Document Viewer</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div id="documentContent">
+                        <!-- Document content will be loaded here -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" id="downloadBtn" class="btn btn-primary" target="_blank">
+                        <i class="fas fa-download me-2"></i>Download PDF
+                    </a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p>&copy; 2025 MOM & CHILD. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Firebase Integration Script -->
+    <script type="module">
+        import { observeAuthState } from './firebase-config.js';
+
+        let currentUser = null;
+
+        // Check authentication state
+        observeAuthState((user) => {
+            currentUser = user;
+            updateAuthUI(user);
+        });
+
+        function updateAuthUI(user) {
+            const authButtons = document.getElementById('authButtons');
+            const registerButton = document.getElementById('registerButton');
+            
+            if (user) {
+                authButtons.innerHTML = '<a class="nav-link" href="dashboard.html"><i class="fas fa-tachometer-alt me-1"></i>Dashboard</a>';
+                registerButton.innerHTML = '<button class="nav-link border-0 bg-transparent" onclick="handleLogout()"><i class="fas fa-sign-out-alt me-1"></i>Logout</button>';
+            } else {
+                authButtons.innerHTML = '<a class="nav-link" href="login.html">Login</a>';
+                registerButton.innerHTML = '<a class="nav-link" href="register.html">Register</a>';
+            }
+        }
+
+        // Make logout function global
+        window.handleLogout = async function() {
+            const { logoutUser } = await import('./firebase-config.js');
+            const result = await logoutUser();
+            if (result.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Logged out successfully!',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            }
+        };
+
+        // Search functionality
+        window.searchResources = function() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const items = document.querySelectorAll('.resource-item');
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                const title = item.querySelector('h5').textContent.toLowerCase();
+                const description = item.querySelector('.resource-description').textContent.toLowerCase();
+                const tags = item.querySelector('.resource-tags').textContent.toLowerCase();
+                
+                if (title.includes(query) || description.includes(query) || tags.includes(query)) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            document.getElementById('noResults').style.display = visibleCount === 0 ? 'block' : 'none';
+        };
+
+        // Filter functionality
+        window.filterResources = function(category) {
+            const items = document.querySelectorAll('.resource-item');
+            const tabs = document.querySelectorAll('.filter-tab');
+            let visibleCount = 0;
+
+            // Update active tab
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            document.getElementById('noResults').style.display = visibleCount === 0 ? 'block' : 'none';
+        };
+
+        // Document viewer functionality
+        window.viewResource = function(resourceId, title) {
+            const modal = new bootstrap.Modal(document.getElementById('documentModal'));
+            document.getElementById('documentModalLabel').textContent = title;
+            
+            // Simulate different document types
+            const documentContent = document.getElementById('documentContent');
+            
+            // Sample PDF URLs (in real implementation, these would be actual document URLs)
+            const sampleDocuments = {
+                'ieee-ml-prenatal': 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+                'ieee-iot-maternal': 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+                'nejm-neonatal': 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+                'lancet-mortality': 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+                'icmhi-pediatric-ai': 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+                'review-telemedicine': 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+                'ieee-blockchain': 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+                'jama-depression': 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+                'himss-mhealth': 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+            };
+            
+            const pdfUrl = sampleDocuments[resourceId] || 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
+            
+            documentContent.innerHTML = `
+                <iframe src="${pdfUrl}" class="pdf-viewer"></iframe>
+            `;
+            
+            document.getElementById('downloadBtn').href = pdfUrl;
+            
+            modal.show();
+        };
+
+        // Enter key search
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchResources();
+            }
+        });
+    </script>
+</body>
+</html>

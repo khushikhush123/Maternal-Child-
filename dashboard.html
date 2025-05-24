@@ -83,23 +83,37 @@
             padding: 30px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             margin-bottom: 30px;
-        }
-
-        .action-btn {
+        }        .action-btn {
             background: linear-gradient(135deg, var(--primary-color) 0%, #9c27b0 100%);
             border: none;
             color: white;
             padding: 15px 25px;
             border-radius: 50px;
-            margin: 10px;
             font-weight: 600;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            width: 100%;
         }
 
         .action-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(106, 13, 173, 0.4);
             color: white;
+            background: linear-gradient(135deg, #7b1fa2 0%, #ad329e 100%);
+        }
+
+        .action-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.3);
+        }
+
+        .action-btn:active {
+            transform: translateY(0);
         }
 
         .recent-activity {
@@ -130,14 +144,47 @@
         .logout-btn:hover {
             background-color: #c82333;
             transform: translateY(-1px);
-        }
-
-        @media (max-width: 768px) {
+        }        @media (max-width: 768px) {
             .dashboard-header {
                 padding: 40px 0;
             }
             .stat-card {
                 margin-bottom: 20px;
+            }
+            .action-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            .quick-actions, .recent-activity {
+                margin-bottom: 20px;
+            }
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .dashboard-header h1 {
+                font-size: 1.8rem;
+            }
+            .dashboard-header .lead {
+                font-size: 1rem;
+            }
+            .action-btn {
+                padding: 10px 15px;
+                font-size: 0.85rem;
+            }
+            .welcome-card {
+                padding: 20px;
+            }
+            .quick-actions, .recent-activity {
+                padding: 20px;
+            }
+            .stat-card {
+                padding: 20px;
+            }
+            .stat-icon {
+                font-size: 2.5rem;
             }
         }
     </style>
@@ -152,19 +199,18 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
+            <div class="collapse navbar-collapse" id="navbarNav">                <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#dashboard">Dashboard</a>
+                        <a class="nav-link active" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="appointments.html">Appointments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="resources.html">Resources</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#profile">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#appointments">Appointments</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#records">Medical Records</a>
                     </li>
                 </ul>
                 <div class="navbar-nav">
@@ -219,7 +265,7 @@
                         <i class="fas fa-calendar-check"></i>
                     </div>
                     <h4>5</h4>
-                    <p class="text-muted">Upcoming Appointments</p>
+                    <p class="text-muted">Appointments</p>
                 </div>
             </div>
             <div class="col-md-3">
@@ -258,19 +304,21 @@
                     <h4 class="mb-4">
                         <i class="fas fa-bolt me-2" style="color: var(--primary-color);"></i>
                         Quick Actions
-                    </h4>
-                    <div class="d-grid gap-3">
-                        <button class="action-btn" onclick="bookAppointment()">
+                    </h4>                    <div class="d-grid gap-3">
+                        <button class="action-btn" onclick="window.location.href='appointments.html'">
                             <i class="fas fa-calendar-plus me-2"></i>Book Appointment
                         </button>
-                        <button class="action-btn" onclick="viewRecords()">
-                            <i class="fas fa-folder-open me-2"></i>View Medical Records
+                        <button class="action-btn" onclick="window.location.href='resources.html'">
+                            <i class="fas fa-book-medical me-2"></i>Medical Resources
                         </button>
-                        <button class="action-btn" onclick="chatWithAI()">
+                        <button class="action-btn" onclick="window.location.href='index.html#chat-ai'">
                             <i class="fas fa-robot me-2"></i>Chat with AI Assistant
                         </button>
-                        <button class="action-btn" onclick="emergencyHelp()">
+                        <button class="action-btn" onclick="window.location.href='index.html#emergency'">
                             <i class="fas fa-ambulance me-2"></i>Emergency Help
+                        </button>
+                        <button class="action-btn" onclick="window.location.href='index.html'">
+                            <i class="fas fa-home me-2"></i>Back to Home
                         </button>
                     </div>
                 </div>
@@ -377,25 +425,13 @@
                     });
                 }
             }
-        });
-
-        // Quick action functions
+        });        // Quick action functions
         window.bookAppointment = function() {
-            Swal.fire({
-                title: 'Book Appointment',
-                text: 'This feature will be available soon!',
-                icon: 'info',
-                confirmButtonColor: '#6a0dad'
-            });
+            window.location.href = 'appointments.html';
         };
 
         window.viewRecords = function() {
-            Swal.fire({
-                title: 'Medical Records',
-                text: 'This feature will be available soon!',
-                icon: 'info',
-                confirmButtonColor: '#6a0dad'
-            });
+            window.location.href = 'resources.html';
         };
 
         window.chatWithAI = function() {
